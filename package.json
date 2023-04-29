@@ -2,7 +2,11 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "husky": "^8.0.3",
     "lerna": "^4.0.0",
     "lint-staged": "^13.2.2"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
