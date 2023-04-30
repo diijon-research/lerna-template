@@ -4,7 +4,7 @@ module.exports = {
     extends: ["template"],
     settings: {
       next: {
-        rootDir: ["apps/*/"],
+        rootDir: ["packages/webapp/"],
       },
     },
   };
