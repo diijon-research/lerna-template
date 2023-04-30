@@ -12,10 +12,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint-old": "next lint"
+    "lint": "next lint",
+    "types:check": "tsc"
   },
   "lint-staged": {
-    "*.ts*": "eslint"
+    "*.{ts,js,tsx}": "eslint --cache --fix"
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
@@ -29,6 +30,7 @@
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "eslint-config-template": "*",
-    "tsconfig": "*"
+    "tsconfig": "*",
+    "typescript": "^5.0.4"
   }
 }

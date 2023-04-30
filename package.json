@@ -9,10 +9,12 @@
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
     "lint-staged": "^13.2.2",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "eslint-config-template": "*"
   },
   "scripts": {
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged && yarn types:check",
+    "types:check": "lerna run types:check"
   }
 }
