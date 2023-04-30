@@ -37,5 +37,19 @@ Thumbs.db
 # Ignore built ts files
 dist/**/*
 
-# ignore yarn.lock
-# yarn.lock
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

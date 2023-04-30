@@ -5,11 +5,14 @@
     "packages/*"
   ],
   "devDependencies": {
+    "eslint": "^8.39.0",
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
-    "lint-staged": "^13.2.2"
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   }
 }
