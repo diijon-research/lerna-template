@@ -100,40 +100,38 @@ function TTSNoMatch({ children }) {
  * 2. Please update `SingleNode` to render the `TTSText` component instead of the `TTSNoMatch` component.
  * 3. Can you find a way to optimize the code?
  *
- * Solution after #3 was good but had edge case where it could not handle nested structures
+ * Solution after #3 was good but had edge case where it could not handle nested structures. After a lot of back and forth, the result was this:
  */
-const SingleNode = ({ children }) => {
-  const findStartingTextNode = (children, parent = null) => {
-    let result = null;
-    React.Children.forEach(children, (child) => {
-      if (result) return;
-
-      if (React.isValidElement(child)) {
-        if (React.Children.count(child.props.children) > 1) {
-          result = parent || child;
-        } else {
-          const foundNode = findStartingTextNode(
-            child.props.children,
-            parent || child
-          );
-          if (foundNode) {
-            result = foundNode;
-          }
+const findStartingTextNode = (children, parent = null, foundNode = false) => {
+  let result = null;
+  React.Children.forEach(children, (child) => {
+    if (result) return;
+    
+    if (React.isValidElement(child)) {
+      if (foundNode || React.Children.count(child.props.children) > 1) {
+        result = parent || child;
+      } else {
+        const foundNode = findStartingTextNode(child.props.children, parent || child);
+        if (foundNode) {
+          result = foundNode;
         }
       }
-    });
-    return result;
-  };
+    }
+  });
+  return result;
+};
 
+const SingleNode = ({ children }) => {
   const startingTextNode = findStartingTextNode(children);
-  const hasMultipleChildren =
-    React.Children.count(startingTextNode?.props.children) > 1;
+  const hasMultipleChildren = React.Children.count(startingTextNode?.props.children) > 1;
 
   if (startingTextNode && hasMultipleChildren) {
     return React.cloneElement(
       startingTextNode,
       {},
-      <TTSText>{startingTextNode.props.children}</TTSText>
+      <TTSText>
+        {startingTextNode.props.children}
+      </TTSText>
     );
   } else if (startingTextNode) {
     return React.cloneElement(
